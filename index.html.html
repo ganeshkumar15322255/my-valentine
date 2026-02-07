@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Sweet Angry Bird</title>
+
+<style>
+
+    /* 💌 Sweet Message Bubble */
+.no-message {
+    position: relative;
+    display: none;
+    margin-top: 20px;
+    padding: 15px 22px;
+    background: linear-gradient(135deg, #ffb3d9, #ffd6e8);
+    color: #b30059;
+    font-size: 1.1rem;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+    animation: popSmile 0.6s ease-out;
+}
+
+/* 😊 Smile Pop Animation */
+@keyframes popSmile {
+    0%   { transform: scale(0.6); opacity: 0; }
+    60%  { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 💗 Little Hearts Around Message */
+.no-message::after {
+    content: "💗 💕 💖";
+    position: absolute;
+    top: -18px;
+    left: 20px;
+    font-size: 0.9rem;
+    animation: heartFloat 1.8s ease-in-out infinite;
+}
+
+@keyframes heartFloat {
+    0%   { opacity: 0; transform: translateY(5px); }
+    50%  { opacity: 1; transform: translateY(-5px); }
+    100% { opacity: 0; transform: translateY(5px); }
+}
+
+/* 🌸 Base Styling */
+body {
+    background-color: #ffe6f0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #d6006c;
+}
+
+/* 💗 Container */
+.container {
+    background: #fff0f5;
+    padding: 50px 70px;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 10;
+}
+
+/* ✨ Text */
+h1 { font-size: 2.5rem; }
+p { font-size: 1.3rem; }
+
+/* 💕 Buttons */
+button {
+    padding: 12px 25px;
+    margin: 20px 15px 0;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+button:hover { transform: scale(1.1); }
+
+.yes {
+    background-color: #ff4da6;
+    color: white;
+}
+.no {
+    background-color: #ccc;
+    color: #333;
+}
+
+/* 💖 Fade Animation */
+.fade {
+    animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 💞 Floating Hearts (Front) */
+.heart {
+    position: absolute;
+    color: rgba(255, 77, 166, 0.8);
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+@keyframes floatUp {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* 💗 Background Hearts */
+.bg-heart {
+    position: absolute;
+    font-size: 40px;
+    color: rgba(255, 192, 203, 0.3);
+    animation: bgFloat 12s linear infinite;
+}
+@keyframes bgFloat {
+    from { transform: translateY(110vh); }
+    to { transform: translateY(-20vh); }
+}
+
+/* 📱 Mobile Friendly */
+@media (max-width: 600px) {
+    .container {
+        padding: 35px 25px;
+    }
+    h1 { font-size: 2rem; }
+    p { font-size: 1.1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💞 Background Hearts -->
+<script>
+for (let i = 0; i < 15; i++) {
+    let bgHeart = document.createElement("div");
+    bgHeart.className = "bg-heart";
+    bgHeart.innerHTML = "💗";
+    bgHeart.style.left = Math.random() * 100 + "vw";
+    bgHeart.style.animationDuration = 8 + Math.random() * 6 + "s";
+    document.body.appendChild(bgHeart);
+}
+</script>
+
+<div class="container" id="mainContainer">
+    <h1>🌹 Happy Rose Day! 🌹</h1>
+    <p>My Dear <strong><span id="typedName"></span></strong>,</p>
+    <p>Will you be my Valentine? 🌹</p>
+
+   <div> <button class="yes" onclick="showYesMessage()">Yes</button>
+    <button class="no" id="noBtn" onclick="noClick()">No</button></div>
+    <p id="noMessage">Please do not say no.</p>
+</div>
+
+<script>
+/* 💕 Typing Effect */
+const nameText = "My Ruler 💖";
+let i = 0;
+function typeName() {
+    if (i < nameText.length) {
+        document.getElementById("typedName").innerHTML += nameText.charAt(i);
+        i++;
+        setTimeout(typeName, 120);
+    }
+}
+typeName();
+
+/* 💖 YES Action */
+function showYesMessage() {
+    const container = document.getElementById('mainContainer');
+    container.innerHTML = `
+       <div class="fade">
+                    <h1>🌹 Yay! 🌹</h1>
+                    <p>Thank you, My Queenie  👑<strong>My Empress Sri Veni 💖</strong></p>
+                    <p>Wishing you endless love and happiness this Rose Day! 🌹🌹🌹</p>
+                </div>
+    `;
+}
+
+/* 😈 NO Button Escape (Mouse + Touch) */
+const noBtn = document.getElementById("noBtn");
+/* 💞 Floating Hearts Generator */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = 15 + Math.random() * 20 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+
+const noMessage = document.getElementById("noMessage");
+
+const sweetMessages = [
+    "😊 Hehe… that button is just pretending 💖",
+    "😌 Aww… my heart only listens to Yes 🌹",
+    "🥰 Nice try… but you’re already mine 💕",
+    "💗 Shhh… destiny says Yes",
+    "😄 Oops… love redirected you"
+];
+
+function moveNoButton() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    const msg = sweetMessages[Math.floor(Math.random() * sweetMessages.length)];
+    noMessage.innerText = msg;
+    noMessage.style.display = "inline-block";
+
+    // Restart animation each time
+    noMessage.style.animation = "none";
+    noMessage.offsetHeight;
+    noMessage.style.animation = "popSmile 0.6s ease-out";
+}
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
+
+function noClick() {
+    alert("That’s okay 😊 I’ll wait for you, always 🌹");
+    location.reload(); // page refresh kore urei jabe
+}
+
+</script>
+
+</body>
+</html>
